@@ -31,13 +31,13 @@ class provider:
                 # Drop the view if it exists
                 connection.execute(text("DROP VIEW IF EXISTS stg__provider"))
                 # Clear all existing rows from the provider table
-                connection.execute(text("TRUNCATE TABLE provider"))
+                connection.execute(text("DELETE FROM provider"))
 
     def process(self):
         # List of SQL file paths
         sql_files = [
-            os.path.join(os.getenv("BASE_PATH"), "provider/stg__provider.sql"),
-            os.path.join(os.getenv("BASE_PATH"), "provider/provider.sql")
+            os.path.join(os.getenv("BASE_PATH"), "provider", "stg__provider.sql"),
+            os.path.join(os.getenv("BASE_PATH"), "provider", "provider.sql")
         ]
         self.execute_sql_files(sql_files)
 

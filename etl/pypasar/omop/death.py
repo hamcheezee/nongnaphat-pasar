@@ -38,7 +38,7 @@ class death:
                     raise ValueError(f'There is duplicate in death_date.')
 
                 # Delete death table
-                connection.execute(text("TRUNCATE TABLE death"))
+                connection.execute(text("DELETE FROM death"))
 
     def process(self):
         # Set SCHEMA
@@ -49,7 +49,7 @@ class death:
             with connection.begin():
                 # Read from source and create a staging table (stg__death)
                 connection.execute(
-                    text(f'''CREATE TEMP VIEW stg__death AS
+                    text(f'''CREATE TEMPORARY TABLE stg__death AS
                         SELECT distinct
                             cdm.person_id AS person_id,
                             cdm.person_source_value AS person_source_value,
